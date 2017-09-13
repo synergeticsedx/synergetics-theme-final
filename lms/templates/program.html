@@ -1,0 +1,40 @@
+<%def name="online_help_token()"><% return "program" %></%def>
+<%namespace name='static' file='static_content.html'/>
+<%!
+from django.utils.translation import ugettext as _
+from django.core.urlresolvers import reverse
+%>
+<%page args="program" expression_filter="h"/>
+
+<article class="course" id="${program.id}" role="region" aria-label="${program.name}">
+    <a href="${reverse('program_about', args=str(program.id))}">
+    <header class="course-image">
+        <div class="cover-image">
+            <img src="${program.banner_image.url if program.banner_image else static.url('images/banner-black-background.jpg')}" alt="${program.name}" />
+            <div class="learn-more" aria-hidden="true">${_("LEARN MORE")}</div>
+        </div>
+    </header>
+
+        <section class="course-info" aria-hidden="true">
+            <h2 class="course-name">
+                <span class="course-title">${program.name}</span>
+            </h2>
+            <div class="course-date" aria-hidden="true">
+                <span style="background: url('/static/images/programs/micromasters-icon.svg') no-repeat; padding: 0 15px;" aria-hidden="true"></span>
+            </div>
+            <span class="course-code">Micro Masters</span>
+            <div class="course-date" aria-hidden="true">
+                ${program.start.strftime('%Y-%m-%dT%H:%M:%S%z')}
+            </div>
+        </section>
+        <div class="sr">
+            <ul>
+                <li>Starts ${program.start.strftime('%Y-%m-%dT%H:%M:%S%z')}</li>
+            </ul>
+        </div>
+    </a>
+</article>
+
+<%static:require_module_async module_name="js/dateutil_factory" class_name="DateUtilFactory">
+    DateUtilFactory.transform(iterationKey=".localized_datetime");
+</%static:require_module_async>
