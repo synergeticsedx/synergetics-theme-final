@@ -86,7 +86,7 @@ from openedx.core.djangoapps.site_configuration import helpers as configuration_
                   % if request.user.is_superuser:
                   <li><a><i class="fa fa-building"></i>Management <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="/site-administration/student-details/">Users</a></li>
+                      <li><a href="/site-administration/student-details/">Participants</a></li>
                       <li><a href="/site-administration/display-courses/">Courses</a></li>
                       % if settings.FEATURES["ENABLE_MICRO_MASTERS"]:
                         <li><a href="${reverse('show-subjects')}">Programs Subjects</a></li>
